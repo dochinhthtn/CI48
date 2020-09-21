@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDTH7hoz0G5FHbyYseUjpAzy1sGwUI_qGI",
+            authDomain: "ci48-a6c8c.firebaseapp.com",
+            databaseURL: "https://ci48-a6c8c.firebaseio.com",
+            projectId: "ci48-a6c8c",
+            storageBucket: "ci48-a6c8c.appspot.com",
+            messagingSenderId: "240475752259",
+            appId: "1:240475752259:web:d85479aa2409b11c7111f6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="//unpkg.com/navigo@6"></script>
 </head>
+
 <body>
     <article>
+        Register
         <register-screen></register-screen>
+        Login
+        <login-screen></login-screen>
     </article>
 
     <script src="./js/index.js" type="module"></script>
 </body>
+
 </html>

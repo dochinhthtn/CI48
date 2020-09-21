@@ -31,12 +31,13 @@ class InputWrapper extends BaseComponent {
         this.props = {
             label: '',
             type: 'text',
-            error: ''
+            error: '',
+            value: ''
         };
     }
 
     static get observedAttributes() {
-        return ['label', 'type', 'error'];
+        return ['label', 'type', 'error', 'value'];
     }
 
     render(){
@@ -45,7 +46,7 @@ class InputWrapper extends BaseComponent {
             <div class="input-wrapper">
                 <label class="input-label" for="input">${this.props.label}</label>
                 <br>
-                <input class="input-main" type="${this.props.type}">
+                <input class="input-main" type="${this.props.type}" value="${this.props.value}">
                 <div class="input-error">${this.props.error}</div>
             </div>
         `;

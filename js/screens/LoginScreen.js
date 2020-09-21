@@ -1,20 +1,17 @@
 import { BaseComponent } from "../BaseComponent.js";
 import { validateEmail, md5 } from "../utils.js";
 
-class RegisterScreen extends BaseComponent {
+class LoginScreen extends BaseComponent {
     constructor() {
         super();
 
         this.state = {
             errors: {
-                name: '',
                 email: '',
                 password: '',
-                confirmPassword: ''
             },
 
             data: {
-                name: '',
                 email: '',
                 password: '',
             }
@@ -23,37 +20,25 @@ class RegisterScreen extends BaseComponent {
 
     render() {
         this._shadowRoot.innerHTML = /*html*/ `
-        <section class="register-screen">
-            <form class="form-register">
-                <input-wrapper class="name" label="Name" type="text" error="${this.state.errors.name}" value="${this.state.data.name}"></input-wrapper>
+        <section class="login-screen">
+            <form class="form-login">
                 <input-wrapper class="email" label="Email" type="email" error="${this.state.errors.email}" value="${this.state.data.email}"></input-wrapper>
                 <input-wrapper class="password" label="Password" type="password" error="${this.state.errors.password}" value="${this.state.data.password}"></input-wrapper>
-                <input-wrapper class="confirm-password" label="Confirm password" type="password" error="${this.state.errors.confirmPassword}"></input-wrapper>
-                <button class="btn-register">Register</button>
+                <button class="btn-login">Login</button>
             </form>
         </section>
         `;
 
-        this.$formRegister = this._shadowRoot.querySelector('.form-register');
-        this.$formRegister.onsubmit = async (event) => {
+        this.$formLogin = this._shadowRoot.querySelector('.form-login');
+        this.$formLogin.onsubmit = async (event) => {
             event.preventDefault();
 
             // lấy dữ liệu từ các input-wrapper
-            let name = this._shadowRoot.querySelector('.name').value;
             let email = this._shadowRoot.querySelector('.email').value;
             let password = this._shadowRoot.querySelector('.password').value;
-            let confirmPassword = this._shadowRoot.querySelector('.confirm-password').value;
 
             // kiểm tra dữ liệu nhập vào, nếu có lỗi thì show ra
             let isPassed = true;
-
-            if (name == '') {
-                isPassed = false;
-                this.state.errors.name = "Input your name";
-            } else {
-                this.state.errors.name = "";
-                this.state.data.name = name;
-            }
 
             if (email == '' || !validateEmail(email)) {
                 isPassed = false;
@@ -71,28 +56,19 @@ class RegisterScreen extends BaseComponent {
                 this.state.data.password = password;
             }
 
-            if (confirmPassword == '' || confirmPassword != password) {
-                isPassed = false;
-                this.state.errors.confirmPassword = "Your password confirmation is not correct";
-            } else {
-                this.state.errors.confirmPassword = "";
-            }
-
             // lưu dữ liệu vào firestore
             if (isPassed) {
-                this.state.data.password = md5(this.state.data.password).toString();
-                // check email trùng
                 let response = await firebase
                     .firestore()
                     .collection('users')
                     .where('email', '==', email)
+                    .where('password', '==', md5(password))
                     .get();
-                // thêm 
+
                 if(response.empty) {
-                    await firebase.firestore().collection('users').add(this.state.data);
-                    alert('Sign up successfully');
+                    alert('Email or password is not correct');
                 } else {
-                    alert('Your email has already been used');
+                    alert('Sign in successfully');
                 }
             }
 
@@ -101,4 +77,4 @@ class RegisterScreen extends BaseComponent {
     }
 }
 
-window.customElements.define('register-screen', RegisterScreen);
+window.customElements.define('login-screen', LoginScreen);
