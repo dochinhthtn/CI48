@@ -1,5 +1,5 @@
 import { BaseComponent } from "../BaseComponent.js";
-import { validateEmail, md5 } from "../utils.js";
+import { validateEmail, md5, getDataFromDocs } from "../utils.js";
 
 class LoginScreen extends BaseComponent {
     constructor() {
@@ -25,6 +25,7 @@ class LoginScreen extends BaseComponent {
                 <input-wrapper class="email" label="Email" type="email" error="${this.state.errors.email}" value="${this.state.data.email}"></input-wrapper>
                 <input-wrapper class="password" label="Password" type="password" error="${this.state.errors.password}" value="${this.state.data.password}"></input-wrapper>
                 <button class="btn-login">Login</button>
+                <a href="#!/register">Not have an account? Register</a>
             </form>
         </section>
         `;
@@ -56,7 +57,7 @@ class LoginScreen extends BaseComponent {
                 this.state.data.password = password;
             }
 
-            // lưu dữ liệu vào firestore
+            // kiểm tra dữ liệu người dùng
             if (isPassed) {
                 let response = await firebase
                     .firestore()
@@ -68,7 +69,11 @@ class LoginScreen extends BaseComponent {
                 if(response.empty) {
                     alert('Email or password is not correct');
                 } else {
-                    alert('Sign in successfully');
+                    console.log(response);
+                    console.log(getDataFromDocs(response.docs));
+                    // lưu người dùng hiện tại
+
+                    // chuyển sang trang index
                 }
             }
 

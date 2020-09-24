@@ -30,6 +30,7 @@ class RegisterScreen extends BaseComponent {
                 <input-wrapper class="password" label="Password" type="password" error="${this.state.errors.password}" value="${this.state.data.password}"></input-wrapper>
                 <input-wrapper class="confirm-password" label="Confirm password" type="password" error="${this.state.errors.confirmPassword}"></input-wrapper>
                 <button class="btn-register">Register</button>
+                <a href="#!/login">Already have an account? Login</a>
             </form>
         </section>
         `;

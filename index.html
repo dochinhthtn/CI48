@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Fontawesome 4.7 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -31,16 +34,19 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     <script src="//unpkg.com/navigo@6"></script>
+
+    <style>
+        body {
+            background-color: #F0F0F0;
+        }
+    </style>
 </head>
 
 <body>
-    <article>
-        Register
-        <register-screen></register-screen>
-        Login
-        <login-screen></login-screen>
+    <article id="app">
+        <index-screen></index-screen>
     </article>
-
+    <i class="fa fa-home" aria-hidden="true"></i>
     <script src="./js/index.js" type="module"></script>
 </body>
 

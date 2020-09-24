@@ -6,9 +6,22 @@ const style = /*html*/ `
         font-family: 'Baloo 2', cursive;
     }
 
+    .input-wrapper {
+        width: 100%;
+    }
+
+    .input-wrapper > input {
+        width: 100%;
+        height: 40px;
+        outline: none;
+        font-size: 20px;
+        padding: 0px 5px;
+    }
+
     .input-label {
         text-transform: uppercase;
         font-size: 15px;
+        display: block;
     }
 
     .input-main {
@@ -45,7 +58,6 @@ class InputWrapper extends BaseComponent {
             ${style}
             <div class="input-wrapper">
                 <label class="input-label" for="input">${this.props.label}</label>
-                <br>
                 <input class="input-main" type="${this.props.type}" value="${this.props.value}">
                 <div class="input-error">${this.props.error}</div>
             </div>
