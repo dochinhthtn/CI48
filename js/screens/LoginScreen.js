@@ -1,5 +1,5 @@
 import { BaseComponent } from "../BaseComponent.js";
-import { validateEmail, md5, getDataFromDocs } from "../utils.js";
+import { validateEmail, md5, getDataFromDocs, saveCurrentUser } from "../utils.js";
 
 class LoginScreen extends BaseComponent {
     constructor() {
@@ -69,11 +69,14 @@ class LoginScreen extends BaseComponent {
                 if(response.empty) {
                     alert('Email or password is not correct');
                 } else {
-                    console.log(response);
-                    console.log(getDataFromDocs(response.docs));
+                    // console.log(response);
+                    // console.log(getDataFromDocs(response.docs));
+                    let currentUser = getDataFromDocs(response.docs)[0];
+                    console.log(currentUser);
                     // lưu người dùng hiện tại
-
+                    saveCurrentUser(currentUser);
                     // chuyển sang trang index
+                    router.navigate('/index');
                 }
             }
 

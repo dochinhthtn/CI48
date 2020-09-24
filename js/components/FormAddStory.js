@@ -1,4 +1,5 @@
 import {BaseComponent} from "../BaseComponent.js";
+import { getCurrentUser } from "../utils.js";
 const style = /*html*/`
 <style>
     * {
@@ -40,7 +41,7 @@ class FormAddStory extends BaseComponent {
         `;
 
         this.$formAddStory = this._shadowRoot.querySelector('.form-add-story');
-        this.$formAddStory.onsubmit = (event) => {
+        this.$formAddStory.onsubmit = async (event) => {
             event.preventDefault();
             // lấy dữ liệu
             let content = this.$formAddStory.content.value.trim();
@@ -49,8 +50,15 @@ class FormAddStory extends BaseComponent {
             if(content == ''){
                 alert('Input your story content');
             } else {
+                let currentUser = getCurrentUser();
                 // thêm dữ liệu vào firestore
+                await firebase.firestore().collection('stories').add({
+                    content: content,
+                    owner: currentUser.id,
+                    dateModified: new Date().toISOString()
+                });
 
+                this.$formAddStory.reset();
             }
 
         }

@@ -24,3 +24,11 @@ export function getDataFromDoc(doc) {
     data.id = doc.id;
     return data;
 }
+
+export function saveCurrentUser(currentUser) {
+    localStorage.setItem('current-user', JSON.stringify(currentUser));
+}
+
+export function getCurrentUser(){
+    return JSON.parse(localStorage.getItem('current-user'));
+}
